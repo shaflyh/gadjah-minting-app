@@ -199,15 +199,15 @@ function App() {
         flex={1}
         ai={"center"}
         style={{ padding: 24, backgroundColor: "var(--primary)" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
+        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg_minting.png" : null}
       >
         <a href={CONFIG.MARKETPLACE_LINK}>
-          <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+          <StyledLogo alt={"logo"} src={"/config/images/logo_minting.png"} />
         </a>
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/example.gif"} />
+            <StyledImg alt={"Gadjah on tux"} src={"/config/images/wl_gadjah.png"} />
           </s.Container>
           <s.SpacerLarge />
           <s.Container
@@ -399,10 +399,15 @@ function App() {
           </s.Container>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg
+            {/* <StyledImg
               alt={"example"}
               src={"/config/images/example.gif"}
               style={{ transform: "scaleX(-1)" }}
+            /> */}
+            <StyledImg 
+                alt={"Gadjah on tux"} 
+                src={"/config/images/wl_gadjah.png"} 
+                style={{ transform: "scaleX(-1)" }}
             />
           </s.Container>
         </ResponsiveWrapper>
@@ -414,9 +419,9 @@ function App() {
               color: "var(--primary-text)",
             }}
           >
-            Please make sure you are connected to the right network (
+            {/* Please make sure you are connected to the right network (
             {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-            Once you make the purchase, you cannot undo this action.
+            Once you make the purchase, you cannot undo this action. */}
           </s.TextDescription>
           <s.SpacerSmall />
           <s.TextDescription
@@ -425,9 +430,9 @@ function App() {
               color: "var(--primary-text)",
             }}
           >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
+            {/* We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
             successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
+            gas limit. */}
           </s.TextDescription>
         </s.Container>
       </s.Container>
@@ -435,4 +440,4 @@ function App() {
   );
 }
 
-export default App;
+export default Second;
