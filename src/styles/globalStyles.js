@@ -51,21 +51,34 @@ export const Container = styled.div`
 `;
 
 export const TextTitle = styled.p`
+  font-family: 'Upheaval';
   color: var(--primary-text);
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 8px;
+  line-height: 1.6;
+`;
+
+export const TextSub = styled.p`
+  font-family: 'Upheaval';
+  color: var(--primary-text);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 8px;
   line-height: 1.6;
 `;
 
 export const TextSubTitle = styled.p`
+  font-family: 'Renomono';
   color: var(--primary-text);
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 400;
   line-height: 1.6;
 `;
 
 export const TextDescription = styled.p`
   color: var(--primary-text);
-  font-size: 16px;
+  font-size: 60px;
   line-height: 1.6;
 `;
 
@@ -73,4 +86,11 @@ export const StyledClickable = styled.div`
   :active {
     opacity: 0.6;
   }
+`;
+
+export const StyledHR = styled.hr`
+  border: 2px solid #fff;  
+  background-color: white;
+  border-radius: 2px;
+  width: 450px;
 `;

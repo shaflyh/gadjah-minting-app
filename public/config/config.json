@@ -12,6 +12,7 @@
   "WEI_COST": 60000000000000000,
   "DISPLAY_COST": 0.06,
   "GAS_LIMIT": 285000,
+  "WEB_LINK": "https://gadjahsocietynft.com",
   "MARKETPLACE": "Opensea",
   "MARKETPLACE_LINK": "https://opensea.io/gadjahsociety",
   "SHOW_BACKGROUND": true

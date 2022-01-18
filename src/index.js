@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-// import Second from "./Second";
+import Second from "./second";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import "./styles/reset.css";
+import GlobalStyle from "./fonts";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <GlobalStyle />
+    <Second />
   </Provider>,
   document.getElementById("root")
 );
