@@ -4,6 +4,14 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import {
+  faInstagram,
+  faDiscord,
+  faTwitter,
+  faMedium
+} from '@fortawesome/free-brands-svg-icons';
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -13,7 +21,7 @@ export const StyledButton = styled.button`
   padding: 10px;
   font-size: 24px;
   border-radius: 6px;
-  border: none;
+  border: 4px solid #49FCE3;
   background-color: #fff;
   padding: 10px;
   letter-spacing: 6px;
@@ -35,9 +43,8 @@ export const StyledButton = styled.button`
 export const StyledRoundButton = styled.button`
   padding: 10px;
   border-radius: 10px;
-  border: none;
+  border: 4px solid #F8A9FF;
   background-color: #fff;
-  padding: 10px;
   // font-weight: bold;
   font-size: 50px;
   color: #7167E3;
@@ -84,10 +91,18 @@ export const ResponsiveWrapperHeader = styled.div`
 
 export const StyledLogo = styled.img`
   display: inline;
-  width: 200px;
+  margin: 10px 10px 10px 100px;
+  width: 100px;
   @media (min-width: 767px) {
-    width: 300px;
+    width: 150px;
   }
+  transition: width 0.5s;
+  transition: height 0.5s;
+`;
+
+export const SocialMediaImage = styled.img`
+  display: inline;
+  width: 33px;
   transition: width 0.5s;
   transition: height 0.5s;
 `;
@@ -113,10 +128,11 @@ export const StyledLink = styled.a`
 `;
 
 export const WalletBox = styled.div`
+  margin: 10px 100px 10px 10px;
   text-decoration: none;
   border-radius: 10px;
   border: 2px solid white;
-  background-color: #7167E3;
+  background-color: #363076;
   padding: 10px;
   font-weight: bold;
   font-size: 15px;
@@ -129,6 +145,26 @@ export const WalletBox = styled.div`
   -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
   -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
 `;
+
+export const SocialMedia = styled.a `
+  color: #fff;
+  margin: 18px;
+  vertical-align: middle;
+`;
+
+export const SocialMediaDiv = styled.div `
+  font-size: 32px;
+  padding: 16px;
+`;
+
+export const HowToMint = styled.a`
+  color: var(--primary-text);
+  font-family: "Upheaval";
+  font-size: 60px;
+  // text-align: right;
+  line-height: 1.6;
+`;
+
 
 function App() {
   const dispatch = useDispatch();
@@ -244,6 +280,26 @@ function App() {
           <a href={CONFIG.WEB_LINK}>
             <StyledLogo alt={"logo"} src={"/config/images/logo_minting.png"} />
           </a>
+
+          <SocialMediaDiv>
+            <SocialMedia href="https://discord.gg/jfjpJZgVUm">
+              <FontAwesomeIcon icon={faDiscord} />
+            </SocialMedia>
+            <SocialMedia href="https://twitter.com/GadjahSociety">
+              <FontAwesomeIcon icon={faTwitter} />
+            </SocialMedia>
+            <SocialMedia href="https://medium.com/@gadjahsociety">
+              <FontAwesomeIcon icon={faMedium} />
+            </SocialMedia>
+            <SocialMedia href="https://www.instagram.com/gadjahsocietynft/">
+              <FontAwesomeIcon icon={faInstagram} />
+            </SocialMedia>
+            <SocialMedia href={CONFIG.MARKETPLACE_LINK}>
+              <SocialMediaImage alt={"logo"} src={"/config/images/logo-opensea.png"} />
+            </SocialMedia>
+          </SocialMediaDiv>
+          
+          {/* </SocialMedia> */}
           <WalletBox>
             {blockchain.account !== "" ? (
             <>
@@ -255,13 +311,13 @@ function App() {
           </WalletBox>
         </ResponsiveWrapperHeader>
 
-        <s.Container flex={1} jc={"center"} ai={"center"}>
+        {/* <s.Container flex={1} jc={"center"} ai={"center"}>
           <s.TextTitle> PUBLIC SALE </s.TextTitle>
-        </s.Container>
+        </s.Container> */}
     
-        <s.SpacerSmall />
+        <s.SpacerLarge />
 
-        <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
+        <ResponsiveWrapper flex={1} style={{ padding: 60 }} test>
             
             <s.Container flex={1} jc={"center"} ai={"center"}>
               <StyledImg alt={"Gadjah with the duck"} src={"/config/images/unr_nft.png"} />
@@ -405,11 +461,11 @@ function App() {
                           color: "var(--accent-text)",
                         }}
                       >
-                        &ensp;&ensp;&ensp;&ensp;{mintAmount}&ensp;&ensp;&ensp;&ensp;
+                        &ensp;&ensp;&ensp;&ensp;{" "}{mintAmount}&ensp;&ensp;&ensp;&ensp;
                       </s.TextDescription>
                       <s.SpacerMedium />
                       <StyledRoundButton
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={claimingNft || mintAmount >= 10 ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
                           incrementMintAmount();
@@ -448,6 +504,15 @@ function App() {
             </s.Container>
           <s.SpacerLarge />
         </ResponsiveWrapper>
+
+        {/* <ResponsiveWrapperHeader>
+          <HowToMint>
+          </HowToMint>
+          <HowToMint>
+            How to mint?
+          </HowToMint>
+        </ResponsiveWrapperHeader> */}
+
         <s.SpacerMedium />
       </s.Container>
     </s.Screen>
