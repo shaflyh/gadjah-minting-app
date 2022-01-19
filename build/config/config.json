@@ -1,0 +1,19 @@
+{
+  "CONTRACT_ADDRESS": "0xc9Ce85df01DDa32d1Aa9251f74fC0a97c6b9499f",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0xc9Ce85df01DDa32d1Aa9251f74fC0a97c6b9499f",
+  "NETWORK": {
+    "NAME": "Rinkeby Test Network",
+    "SYMBOL": "ETH",
+    "ID": 4
+  },
+  "NFT_NAME": "Gadjah Society",
+  "SYMBOL": "GDJH",
+  "MAX_SUPPLY": 100,
+  "WEI_COST": 60000000000000000,
+  "DISPLAY_COST": 0.06,
+  "GAS_LIMIT": 285000,
+  "WEB_LINK": "https://gadjahsocietynft.com",
+  "MARKETPLACE": "Opensea",
+  "MARKETPLACE_LINK": "https://opensea.io/gadjahsociety",
+  "SHOW_BACKGROUND": true
+}

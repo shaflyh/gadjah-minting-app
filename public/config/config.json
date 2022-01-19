@@ -1,6 +1,6 @@
 {
-  "CONTRACT_ADDRESS": "0x919a6430dB6C4E76CB41ef7E75ca645F9b1FC275",
-  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x919a6430dB6C4E76CB41ef7E75ca645F9b1FC275",
+  "CONTRACT_ADDRESS": "0xc9Ce85df01DDa32d1Aa9251f74fC0a97c6b9499f",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0xc9Ce85df01DDa32d1Aa9251f74fC0a97c6b9499f",
   "NETWORK": {
     "NAME": "Rinkeby Test Network",
     "SYMBOL": "ETH",
@@ -12,6 +12,7 @@
   "WEI_COST": 60000000000000000,
   "DISPLAY_COST": 0.06,
   "GAS_LIMIT": 285000,
+  "WEB_LINK": "https://gadjahsocietynft.com",
   "MARKETPLACE": "Opensea",
   "MARKETPLACE_LINK": "https://opensea.io/gadjahsociety",
   "SHOW_BACKGROUND": true
