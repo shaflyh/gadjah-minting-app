@@ -19,8 +19,8 @@
   "author": "Ali Solanki, Daniel Eugene Botha",
   "license": "MIT",
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build"
+    "start": "react-scripts start",
+    "build": "react-scripts --openssl-legacy-provider build"
   },
   "browserslist": {
     "production": [

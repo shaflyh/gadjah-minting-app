@@ -11,7 +11,7 @@ import GlobalStyle from "./fonts";
 ReactDOM.render(
   <Provider store={store}>
     <GlobalStyle />
-    <Second />
+    <App />
   </Provider>,
   document.getElementById("root")
 );
