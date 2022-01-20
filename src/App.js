@@ -5,13 +5,14 @@ import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import {
   faInstagram,
   faDiscord,
   faTwitter,
   faMedium
 } from '@fortawesome/free-brands-svg-icons';
+import { Modal } from "./Modal";
+import Swal from "sweetalert2";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -20,14 +21,14 @@ export const StyledButton = styled.button`
   font-family: 'Upheaval';
   padding: 10px;
   font-size: 24px;
-  border-radius: 6px;
-  border: 4px solid #49FCE3;
-  background-color: #fff;
+  border-radius: 4px;
+  border: 4px solid #7167E3;
+  background-color: #49FCE3;
   padding: 10px;
   letter-spacing: 6px;
   // font-weight: bold;
   color: #7167E3;
-  width: 450px;
+  width: 75%;
   height: 50px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -43,7 +44,7 @@ export const StyledButton = styled.button`
 export const StyledRoundButton = styled.button`
   padding: 10px;
   border-radius: 10px;
-  border: 4px solid #F8A9FF;
+  // border: 4px solid #F8A9FF;
   background-color: #fff;
   // font-weight: bold;
   font-size: 50px;
@@ -54,24 +55,27 @@ export const StyledRoundButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+  // box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+  // -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
   -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
   }
+  margin: auto 0;
 `;
 
 export const ResponsiveWrapper = styled.div`
+  background-color: rgba(0, 0,0, 0.25);
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: stretched;
   align-items: stretched;
-  // margin: auto;
-  width: 100%;
+  margin: auto;
+  border-radius: 20px;
+  width: 80%;
   @media (min-width: 767px) {
     flex-direction: row;
   }
@@ -89,9 +93,20 @@ export const ResponsiveWrapperHeader = styled.div`
   }
 `;
 
+export const ResponsiveWrapperContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretched;
+  width: 75%;
+  @media (min-width: 767px) {
+    flex-direction: row;
+  }
+`;
+
 export const StyledLogo = styled.img`
   display: inline;
-  margin: 10px 10px 10px 100px;
+  margin: 10px 10px 10px 200px;
   width: 100px;
   @media (min-width: 767px) {
     width: 150px;
@@ -109,15 +124,12 @@ export const SocialMediaImage = styled.img`
 
 export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
-  // border: 4px dashed var(--secondary);
-  // background-color: var(--accent);
-  // border-radius: 100%;
-  width: 300px;
+  width: 280px;
   @media (min-width: 900px) {
-    width: 350px;
+    width: 340px;
   }
   @media (min-width: 1000px) {
-    width: 400px;
+    width: 380px;
   }
   transition: width 0.5s;
 `;
@@ -158,21 +170,60 @@ export const SocialMediaDiv = styled.div `
 `;
 
 export const HowToMint = styled.a`
-  color: var(--primary-text);
-  font-family: "Upheaval";
-  font-size: 60px;
+  color: #49FCE3;
+  text-decoration: underline;
+  font-family: "Renomono";
+  font-size: 22px;
   // text-align: right;
   line-height: 1.6;
+  cursor: pointer;
+`;
+
+export const ModalButton = styled.button `
+  padding: 13px 29px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background: crimson;
+  color: white;
+  cursor: pointer;
+`;
+
+export const customClasss = `
+  border: 2px solid #000;
 `;
 
 
+// export const ModalMinting = ({ setShowModal }) => {
+  
+//   {Swal.fire({  
+//     title: 'Minting Success!',  
+//     text: 'Go check your Metamask or go to opensea.io!',  
+//     imageUrl: '/config/images/winking.png',  
+//     timer: 3000,
+//     timerProgressBar: true,
+//     background: '#49FCE3',
+//     customClass: 'swal-custom'
+//     })};
+// };
+
 function App() {
+  const [showModal, setShowModal] = useState(false);
+  
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const [mintingSuccess, setMintingStatus] = useState(false);
+
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [walletAddress, setAddress] = useState("No connection");
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [feedback, setFeedback] = useState(``);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -201,7 +252,6 @@ function App() {
     let totalGasLimit = String(gasLimit * mintAmount);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
       .mint(blockchain.account, mintAmount)
@@ -221,7 +271,21 @@ function App() {
         setFeedback(
           `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
         );
+        // setMintingStatus(true);
+        // setShowModal(true);
         setClaimingNft(false);
+        {Swal.fire({  
+          title: 'Minting Success!',  
+          icon: 'success',
+          iconColor: '#7167E3',
+          text: 'Go check your Metamask or go to Opensea!',  
+          // imageUrl: 'https://c.tenor.com/LY1HzBmDJwAAAAAC/wink-bryan-breynolds.gif',  
+          imageWidth: '200px',
+          timer: 4000,
+          timerProgressBar: true,
+          background: '#49FCE3',
+          customClass: 'swal-custom',
+        })};
         dispatch(fetchData(blockchain.account));
       });
   };
@@ -267,7 +331,7 @@ function App() {
   useEffect(() => {
     getData();
   }, [blockchain.account]);
-
+  
   return (
     <s.Screen>
       <s.Container
@@ -318,7 +382,6 @@ function App() {
         <s.SpacerLarge />
 
         <ResponsiveWrapper flex={1} style={{ padding: 60 }} test>
-            
             <s.Container flex={1} jc={"center"} ai={"center"}>
               <StyledImg alt={"Gadjah with the duck"} src={"/config/images/unr_nft.png"} />
             </s.Container>
@@ -336,43 +399,7 @@ function App() {
             >
               {data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle> */}
-            {/* <s.TextDescription
-              style={{
-                textAlign: "center",
-                color: "var(--primary-text)",
-              }}
-            >
-              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
-              </StyledLink>
-            </s.TextDescription> */}
-            {/* <span
-              style={{
-                textAlign: "center",
-              }}
-            >
-              <StyledButton
-                onClick={(e) => {
-                  window.open("/config/roadmap.pdf", "_blank");
-                }}
-                style={{
-                  margin: "5px",
-                }}
-              >
-                Roadmap
-              </StyledButton>
-              <StyledButton
-                style={{
-                  margin: "5px",
-                }}
-                onClick={(e) => {
-                  window.open(CONFIG.MARKETPLACE_LINK, "_blank");
-                }}
-              >
-                {CONFIG.MARKETPLACE}
-              </StyledButton>
-            </span> */}
-            {/* <s.SpacerSmall /> */}
+            
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
                 <s.TextSub
@@ -392,31 +419,22 @@ function App() {
               </>
             ) : (
               <>
+              <ResponsiveWrapperContent>
+                <s.TextSub>
+                  Price
+                </s.TextSub>
                 <s.TextSub
                   style={{ textAlign: "center", color: "var(--accent-text)",  }}
                 >
-                  Price&emsp;&emsp;&emsp;&emsp;&emsp;{CONFIG.DISPLAY_COST}{" "}{CONFIG.NETWORK.SYMBOL}
+                  {CONFIG.DISPLAY_COST}{" "}{CONFIG.NETWORK.SYMBOL}
                 </s.TextSub>
+                </ResponsiveWrapperContent>
                 <s.SpacerSmall />
                 <s.StyledHR></s.StyledHR>
                 <s.SpacerXSmall />
-                {/* <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  Excluding gas fees.
-                </s.TextDescription> */}
-                <s.SpacerSmall />
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "var(--accent-text)",
-                      }}
-                    >
-                      {/* Connect to the {CONFIG.NETWORK.NAME} network                       */}
-                    </s.TextDescription>
                     <s.SpacerSmall />
                     <StyledButton
                       onClick={(e) => {
@@ -425,7 +443,7 @@ function App() {
                         getData();
                       }}
                     >
-                      CONNECT TO METAMASK
+                      CONNECT WALLET
                     </StyledButton>
                     {blockchain.errorMsg !== "" ? (
                       <>
@@ -434,6 +452,7 @@ function App() {
                           style={{
                             textAlign: "center",
                             color: "var(--accent-text)",
+                            fontSize: "20px"
                           }}
                         >
                           {blockchain.errorMsg}
@@ -444,6 +463,7 @@ function App() {
                 ) : (
                   <>
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                    <ResponsiveWrapperContent>
                       <StyledRoundButton
                         style={{ lineHeight: 0.4 }}
                         disabled={claimingNft ? 1 : 0}
@@ -461,9 +481,8 @@ function App() {
                           color: "var(--accent-text)",
                         }}
                       >
-                        &ensp;&ensp;&ensp;&ensp;{" "}{mintAmount}&ensp;&ensp;&ensp;&ensp;
+                        {mintAmount}
                       </s.TextDescription>
-                      <s.SpacerMedium />
                       <StyledRoundButton
                         disabled={claimingNft || mintAmount >= 10 ? 1 : 0}
                         onClick={(e) => {
@@ -473,15 +492,22 @@ function App() {
                       >
                         +
                       </StyledRoundButton>
+                      </ResponsiveWrapperContent>
                     </s.Container>
-                    <s.SpacerSmall />
                     <s.StyledHR ></s.StyledHR>
                     <s.SpacerSmall />
-                    <s.TextSub
-                      style={{ textAlign: "center", color: "var(--accent-text)",  }}
-                    >
-                      Total&emsp;&emsp;&emsp;&emsp;&emsp;{CONFIG.DISPLAY_COST * mintAmount}{" "}{CONFIG.NETWORK.SYMBOL}
-                    </s.TextSub>
+                    
+                    <ResponsiveWrapperContent>
+                      <s.TextSub>
+                        Total
+                      </s.TextSub>
+                      <s.TextSub
+                        style={{ textAlign: "right", color: "var(--accent-text)",  }}
+                      >
+                        {CONFIG.DISPLAY_COST * mintAmount}{" "}{CONFIG.NETWORK.SYMBOL}
+                      </s.TextSub>  
+                    </ResponsiveWrapperContent>
+                    
                     <s.SpacerSmall />
                     <s.SpacerXSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
@@ -495,24 +521,19 @@ function App() {
                       >
                         {claimingNft ? "MINTING..." : "MINT NOW"}
                       </StyledButton>
-                    </s.Container>
+                    </s.Container>                   
                   </>
                 )}
+                <s.SpacerLarge />
+                <HowToMint onClick={openModal}>
+                  How to mint?
+                </HowToMint>
+                {showModal ? <Modal setShowModal={setShowModal} /> : null}
               </>
-            )}
-            <s.SpacerMedium />
+            )} 
             </s.Container>
           <s.SpacerLarge />
         </ResponsiveWrapper>
-
-        {/* <ResponsiveWrapperHeader>
-          <HowToMint>
-          </HowToMint>
-          <HowToMint>
-            How to mint?
-          </HowToMint>
-        </ResponsiveWrapperHeader> */}
-
         <s.SpacerMedium />
       </s.Container>
     </s.Screen>

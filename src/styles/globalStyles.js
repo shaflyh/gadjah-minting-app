@@ -78,6 +78,7 @@ export const TextSubTitle = styled.p`
 
 export const TextDescription = styled.p`
   color: var(--primary-text);
+  font-family: "Renomono";
   font-size: 60px;
   line-height: 1.6;
 `;
@@ -92,5 +93,5 @@ export const StyledHR = styled.hr`
   border: 2px solid #fff;  
   background-color: white;
   border-radius: 2px;
-  width: 450px;
+  width: 75%;
 `;
