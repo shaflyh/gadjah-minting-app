@@ -38,6 +38,10 @@ export const ContainerModal = styled.div `
   border-radius: 5px;
   position: relative;
   animation: ${animate} 0.3s;
+  @media (max-width: 600px) {
+    width: 360px;
+    height: 465px;
+  }
 `;
 
 export const ModalButton = styled.button `
@@ -69,6 +73,9 @@ export const ModalTitle = styled.h2 `
     font-size: 64px;
     color: #F9F871;
     text-align: center;
+    @media (max-width: 600px) {
+      font-size: 33px;
+    }
 `;
 
 export const ModalSubTitle = styled.h3 `
@@ -79,6 +86,10 @@ export const ModalSubTitle = styled.h3 `
     line-height: 2;
     letter-spacing: 2px;
     text-align: left;
+    @media (max-width: 600px) {
+      font-size: 21px;
+      line-height: 1;
+    }
 `;
 
 export const ModalText = styled.p `
@@ -88,6 +99,10 @@ export const ModalText = styled.p `
     font-weight: 100;
     text-align: left;
     line-height: 1.2;
+    @media (max-width: 600px) {
+      font-size: 10px;
+      line-height: 1.5;
+    }
 `;
 
 
@@ -111,17 +126,18 @@ export const Modal = ({ setShowModal }) => {
               <s.SpacerLarge />
               
             <ol>
+              
                 <ModalSubTitle>
                     <li> Connect to your wallet </li>
                 </ModalSubTitle>
                 <ul>
                     <li> <ModalText>
-                        Click "Connect To Metamask" and authorize connection in your wallet.
+                        Click "Connect Wallet" and authorize connection in your wallet.
                     </ModalText> </li>
                 </ul>
                 <s.SpacerSmall />
                 <ModalSubTitle>
-                    <li> Choose how many would you like to mint </li>
+                    <li> Choose how many NFT(s) you would like to mint </li>
                 </ModalSubTitle>
                 <ul>
                     <li> <ModalText>

@@ -62,10 +62,17 @@ export const TextTitle = styled.p`
 export const TextSub = styled.p`
   font-family: 'Upheaval';
   color: var(--primary-text);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 400;
   letter-spacing: 8px;
   line-height: 1.6;
+  @media (max-width: 1330px) {
+    font-size: 19px;
+  }
+  @media (max-width: 600px) {
+    font-size: 12px;
+
+  }
 `;
 
 export const TextSubTitle = styled.p`
@@ -81,6 +88,9 @@ export const TextDescription = styled.p`
   font-family: "Renomono";
   font-size: 60px;
   line-height: 1.6;
+  @media (max-width: 1330px) {
+    font-size: 50px;
+  }
 `;
 
 export const StyledClickable = styled.div`
@@ -93,5 +103,5 @@ export const StyledHR = styled.hr`
   border: 2px solid #fff;  
   background-color: white;
   border-radius: 2px;
-  width: 75%;
+  width: 76%;
 `;

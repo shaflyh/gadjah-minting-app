@@ -1,0 +1,44 @@
+
+@font-face {
+    font-family: Renomono;
+    src: url(/src/fonts/RenoMono.otf);
+  }
+  
+  @font-face {
+    font-family: Upheaval;
+    src: url(/src/fonts/upheavtt.ttf);
+  }
+  
+  .swal-title {
+    font-family: Gumball;
+    font-weight: 400;
+    font-size: 36px;
+    color: #F9F871;
+    border-radius: 20px;
+  }
+  
+  /* .swal-text {
+    font-family: Renomono;
+    font-size: 18px;
+    color: #FFF;
+    border-radius: 20px;
+  } */
+  
+  .swal-custom {
+    font-family: Upheaval;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000;
+    letter-spacing: 2px;
+    border-radius: 20px;
+    width: 800px;
+    border: 4px solid #7167E3;
+  }
+
+.zoom-a {
+    transition: transform .3s;
+}
+
+.zoom-a:hover {
+    transform: scale(1.3);
+}

@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import Second from "./second";
+import Publicsale from "./Publicsale";
+import Third from "./Third";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -11,7 +12,8 @@ import GlobalStyle from "./fonts";
 ReactDOM.render(
   <Provider store={store}>
     <GlobalStyle />
-    <App />
+    <App />                   {/* Pre-Sale */}
+    {/* <Publicsale /> */}    {/* Public Sale */}
   </Provider>,
   document.getElementById("root")
 );

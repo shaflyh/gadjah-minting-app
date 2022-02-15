@@ -1,6 +1,6 @@
 {
-  "CONTRACT_ADDRESS": "0xc9Ce85df01DDa32d1Aa9251f74fC0a97c6b9499f",
-  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0xc9Ce85df01DDa32d1Aa9251f74fC0a97c6b9499f",
+  "CONTRACT_ADDRESS": "0x60C0CFbA6F79142aDAbA3130c915D33d82fea86D",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x60C0CFbA6F79142aDAbA3130c915D33d82fea86D",
   "NETWORK": {
     "NAME": "Rinkeby Test Network",
     "SYMBOL": "ETH",
@@ -15,5 +15,6 @@
   "WEB_LINK": "https://gadjahsociety.com",
   "MARKETPLACE": "Opensea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/gadjahsociety",
-  "SHOW_BACKGROUND": true
+  "SHOW_BACKGROUND": true,
+  "WHITELIST_URL" : "https://api.gadjahsocietynft.com/whitelist"
 }
