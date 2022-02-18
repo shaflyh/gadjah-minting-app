@@ -57,6 +57,9 @@ export const TextTitle = styled.p`
   font-weight: 400;
   letter-spacing: 8px;
   line-height: 1.6;
+  @media (max-width 480px) {
+    font-size: 36px;
+  }
 `;
 
 export const TextSub = styled.p`
@@ -81,6 +84,9 @@ export const TextSubTitle = styled.p`
   font-size: 20px;
   font-weight: 400;
   line-height: 1.6;
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
 `;
 
 export const TextDescription = styled.p`

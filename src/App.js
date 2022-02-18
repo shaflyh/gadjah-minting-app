@@ -105,6 +105,64 @@ export const ResponsiveWrapper = styled.div`
   }
 `;
 
+export const ResponsiveWrapperZero = styled.div `
+  filter: blur(4px);
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0,0, 0.3);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: stretched;
+  align-items: stretched;
+  margin: auto;
+  border-radius: 20px;
+  width: 75%;
+  padding: 50px 90px;
+  @media (min-width: 940px) {
+    flex-direction: row;
+  }
+  @media (max-width: 1330px) {
+    padding: 0;
+  }
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+`;
+
+export const Countdown = styled.p `
+  font-family: 'Upheaval';
+  color: var(--primary-text);
+  font-size: 56px;
+  font-weight: 400;
+  letter-spacing: 8px;
+  // -webkit-text-stroke: 2px #49FCE3;
+  -webkit-text-stroke: 2px #7167E3;
+  z-index: 99;
+  top: 42%;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  @media (max-width: 420px) {
+    top: 50%;
+    margin: 0 20px;
+    font-size: 36px;
+    -webkit-text-stroke: 1px #7167E3;
+  }
+`;
+
+export const CTitle = styled.p `
+  font-size: 40px;
+  webkit-text-stroke: 2px #7167E3;
+  @media (max-width: 420px) {
+    margin: 0 20px;
+    font-size: 24px;
+    -webkit-text-stroke: 1px #7167E3;
+  }
+`;
+
 export const ResponsiveWrapperHeader = styled.div`
   display: flex;
   flex: 1;
@@ -182,6 +240,40 @@ export const StyledLink = styled.a`
   text-decoration: none;
 `;
 
+export const Texto = styled.div `
+  font-family: 'Upheaval';
+  color: var(--primary-text);
+  font-size: 18px;
+  letter-spacing: 8px;
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+`;
+
+export const Box = styled.div `
+margin: auto;
+text-decoration: none;
+border: 4px solid white;
+background-color: #172a5a;
+// font-weight: bold;
+// font-size: 15px;
+width: 350px;
+height: 100px;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+-webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+-moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+@media (max-width: 480px) {
+  width: 75%;
+  height: 85px;
+}
+// @media (max-width: 767px) {
+//   margin: auto;
+// }
+`;
+
 export const WalletBox = styled.div`
   margin: 10px 120px 10px 10px;
   text-decoration: none;
@@ -204,6 +296,8 @@ export const WalletBox = styled.div`
   }
   @media (max-width: 767px) {
     margin: auto;
+    width: 200px;
+    height: 40px;
   }
 `;
 
@@ -261,7 +355,7 @@ export const customClasss = `
 export const UnrevealVid = styled.video `
   border-radius: 4px;
   // border: 4px solid #7167e3;
-  width: 280px;
+  width: 380px;
   @media (max-width: 380px) {
     width: 175px;
   }
@@ -329,6 +423,39 @@ function App() {
     WHITELIST_URL: ""
   });
 
+   //Merkle
+   const [accounts, setAccounts] = useState([]);
+   const { MerkleTree } = require('merkletreejs');
+   const keccak256 = require('keccak256');
+ 
+   useEffect(() => {
+     requestAccount();
+   }, [])
+ 
+   async function requestAccount() {
+     if(typeof window.ethereum !== 'undefined') {
+       let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+       setAccounts(accounts);
+     }
+   }
+ 
+   let json = require('./Accounts.json');
+   const Whitelist = [];
+   for (var i in json) {
+      Whitelist.push(json[i].wallet)
+  }
+
+   const leafNodes = Whitelist.map(addr => keccak256(addr));
+   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
+   const rootHash = merkleTree.getRoot();
+   const claimingAddress = keccak256(accounts[0]);
+   const hexProof = merkleTree.getHexProof(claimingAddress);
+
+    // console.log(hexProof.toString())
+    // console.log("hexproof:" + hexProof)
+
+ //Merkle
+
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
@@ -356,18 +483,6 @@ function App() {
           `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
         );
         setClaimingNft(false);
-        // {Swal.fire({  
-        //   title: 'Minting Success!',  
-        //   icon: 'success',
-        //   iconColor: '#7167E3',
-        //   text: 'Go check your Metamask or go to Opensea!',  
-        //   // imageUrl: 'https://c.tenor.com/LY1HzBmDJwAAAAAC/wink-bryan-breynolds.gif',  
-        //   imageWidth: '200px',
-        //   timer: 4000,
-        //   timerProgressBar: true,
-        //   background: '#49FCE3',
-        //   customClass: 'swal-custom',
-        // })};
         openMintsuccess();
         dispatch(fetchData(blockchain.account));
       });
@@ -375,6 +490,41 @@ function App() {
 
   const [wl, setWL] = useState(null);
 
+  //new code
+  const WlMint = () => {
+    let cost = CONFIG.WL_COST;
+    let gasLimit = CONFIG.GAS_LIMIT;
+    let totalCostWei = String(cost * mintAmount);
+    let totalGasLimit = String(gasLimit * mintAmount);
+    console.log("Cost: ", totalCostWei);
+    console.log("Gas limit: ", totalGasLimit);
+    setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
+    setClaimingNft(true);
+    blockchain.smartContract.methods
+      .mint(mintAmount) //mintPresale dan pake hexproof, ya, ntr diganti
+      .send({
+        gasLimit: String(totalGasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: blockchain.account,
+        value: totalCostWei,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setFeedback("Sorry, You Are not whitelisted.");
+        setClaimingNft(false);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setFeedback(
+          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+        );
+        setClaimingNft(false);
+        openMintsuccess();  //nanti dihapus yaa
+        dispatch(fetchData(blockchain.account));
+      });
+  };
+  //new code
+  console.log(feedback)
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
     if (newMintAmount < 1) {
@@ -399,9 +549,10 @@ function App() {
         dispatch(fetchData(blockchain.account));
         setCheckWallet(false);
         setAddress("No connection");
-        console.log(wl_wallet)
+        // console.log(wl_wallet)
         wl && wl.map((w) => {
           if (w.wallet.toUpperCase() == blockchain.account.toUpperCase()) {
+            console.log(w.wallet)
             checking = true;
             setCheckWallet(true);
           }
@@ -412,18 +563,6 @@ function App() {
           setAddress(blockchain.account.substring(0,4) + "..." + blockchain.account.substring(38,42));
         }
         else {
-          // {Swal.fire({  
-          //   title: 'You can\'t mint NFT!',  
-          //   icon: 'error',
-          //   // iconColor: '#7167E3',
-          //   text: 'You are not listed in the whitelist.',  
-          //   // imageUrl: 'https://c.tenor.com/LY1HzBmDJwAAAAAC/wink-bryan-breynolds.gif',  
-          //   // imageWidth: '200px',
-          //   // timer: 4000,
-          //   // timerProgressBar: true,
-          //   // background: '#49FCE3',
-          //   // customClass: 'swal-custom',
-          // })};
           openNotwl();
         }
       }
@@ -454,7 +593,47 @@ function App() {
       // console.log(response.data.reponse)
     });
   }, []);
-    
+  
+  const calculateTimeLeft = () => {
+    let year = new Date().getFullYear();
+    const difference = +new Date(`${year}-2-18 21:10:00`) - +new Date();
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [year] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+  });
+
+  const timerComponents = [];
+
+  Object.keys(timeLeft).forEach((interval) => {
+    if (!timeLeft[interval]) {
+      return;
+    }
+
+    timerComponents.push(
+      <span>
+        {timeLeft[interval]} {interval}{" "}
+      </span>
+    );
+  });
+
   return (
     <s.Screen>
       <s.Container
@@ -503,7 +682,101 @@ function App() {
         </s.Container> */}
     
         <s.SpacerSmall />
-
+        {timerComponents.length ?  
+          <>
+          <Countdown>
+            <CTitle>Gadjah Society NFT Minting in</CTitle> <br></br>
+            {timerComponents}
+          </Countdown>
+      
+          <ResponsiveWrapperZero flex={1} test>
+          <s.Container flex={1} jc={"center"} ai={"center"}>
+            {/* <StyledImg alt={"Gadjah with the duck"} src={"/config/images/unr_nft.png"} /> */}
+            <UnrevealVid autoPlay loop muted>
+              <source src={"/config/images/g_reveal.mp4"} type='video/mp4'/>
+            </UnrevealVid>
+          </s.Container>
+          {/* <s.SpacerLarge /> */}
+          <s.Container flex={1} jc={"center"} ai={"center"} >
+          <s.SpacerSmall />
+          
+          {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+            <>
+              <s.TextSub
+                style={{ textAlign: "center", color: "var(--accent-text)" }}
+              >
+                The sale has ended.
+              </s.TextSub>
+              <s.TextDescription
+                style={{ textAlign: "center", color: "var(--accent-text)" }}
+              >
+                You can still find {CONFIG.NFT_NAME} on
+              </s.TextDescription>
+              <s.SpacerSmall />
+              <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                {CONFIG.MARKETPLACE}
+              </StyledLink>
+            </>
+          ) : (
+            <>
+            <ResponsiveWrapperContent>
+              <s.TextSub>
+                Price
+              </s.TextSub>
+              <s.TextSub
+                style={{ textAlign: "center", color: "var(--accent-text)",  }}
+              >
+                {CONFIG.DISPLAY_COST}{" "}{CONFIG.NETWORK.SYMBOL}
+              </s.TextSub>
+              </ResponsiveWrapperContent>
+              <s.SpacerSmall />
+              <s.StyledHR></s.StyledHR>
+              <s.SpacerXSmall />
+              {!wl_wallet || blockchain.account === "" ||
+              blockchain.smartContract === null ? (
+                <s.Container ai={"center"} jc={"center"}>
+                  <s.SpacerSmall />
+                  <StyledButton
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(connect());
+                      getData();
+                      // checkWL();
+                    }}
+                    style={{cursor: "none"}}
+                    disabled>
+                    CONNECT WALLET
+                  </StyledButton>
+                  {blockchain.errorMsg !== "" ? (
+                    <>
+                      <s.SpacerSmall />
+                      <s.TextDescription
+                        style={{
+                          textAlign: "center",
+                          color: "var(--accent-text)",
+                          fontSize: "20px"
+                        }}
+                      >
+                        {blockchain.errorMsg}
+                      </s.TextDescription>
+                    </>
+                  ) : null}
+                </s.Container>
+              ) :  null }
+              <s.SpacerLarge />
+              <HowToMint style={{cursor: "none", textDecoration: "none" }}>
+                how to mint <FontAwesomeIcon icon={ faQuestionCircle } />
+              </HowToMint>
+              {showModal ? <Modal setShowModal={setShowModal} /> : null}
+            </>
+          )} 
+          {showNotwl ? <Notwl setShowNotwl={setShowNotwl} /> : null}
+          {showMintsuccess ? <Mintsuccess setShowMintsuccess={setShowMintsuccess} /> : null}
+          </s.Container>
+        <s.SpacerLarge />
+      </ResponsiveWrapperZero>
+      </>
+        :
         <ResponsiveWrapper flex={1} test>
             <s.Container flex={1} jc={"center"} ai={"center"}>
               {/* <StyledImg alt={"Gadjah with the duck"} src={"/config/images/unr_nft.png"} /> */}
@@ -513,18 +786,25 @@ function App() {
             </s.Container>
             {/* <s.SpacerLarge /> */}
             <s.Container flex={1} jc={"center"} ai={"center"} >
-            <s.StyledHR></s.StyledHR>
+            {!(!wl_wallet || blockchain.account === "" ||
+                blockchain.smartContract === null) ? (
+                <>
+                <Box>
+                <s.TextTitle
+                  style={{
+                    textAlign: "center",
+                    fontSize: 26,
+                    fontWeight: "bold",
+                    color: "var(--accent-text)",
+                  }}
+                >
+                  {data.totalSupply} of {CONFIG.MAX_SUPPLY} <br></br>
+                <Texto>NFT Available</Texto>
+                </s.TextTitle>
+                </Box>
+                </>) : null 
+              }
             <s.SpacerSmall />
-            {/* <s.TextTitle
-              style={{
-                textAlign: "center",
-                fontSize: 50,
-                fontWeight: "bold",
-                color: "var(--accent-text)",
-              }}
-            >
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
-            </s.TextTitle> */}
             
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
@@ -557,7 +837,7 @@ function App() {
                 </ResponsiveWrapperContent>
                 <s.SpacerSmall />
                 <s.StyledHR></s.StyledHR>
-                <s.SpacerXSmall />
+                {/* <s.SpacerXSmall /> */}
                 {!wl_wallet || blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
@@ -643,6 +923,7 @@ function App() {
                         onClick={(e) => {
                           e.preventDefault();
                           claimNFTs();
+                          // WlMint();
                           getData();
                         }}
                       >
@@ -662,7 +943,7 @@ function App() {
             {showMintsuccess ? <Mintsuccess setShowMintsuccess={setShowMintsuccess} /> : null}
             </s.Container>
           <s.SpacerLarge />
-        </ResponsiveWrapper>
+        </ResponsiveWrapper> }
         <s.SpacerMedium />
       </s.Container>
     </s.Screen>

@@ -141,7 +141,7 @@ export const Modal = ({ setShowModal }) => {
                 </ModalSubTitle>
                 <ul>
                     <li> <ModalText>
-                        You are entitled to mint up to 10 Gadjah Society NFTs.
+                        You are entitled to mint up to 5 Gadjah Society NFTs.
                     </ModalText> </li>
                 </ul>
                 <s.SpacerSmall />

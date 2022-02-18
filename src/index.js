@@ -12,8 +12,8 @@ import GlobalStyle from "./fonts";
 ReactDOM.render(
   <Provider store={store}>
     <GlobalStyle />
-    <App />                   {/* Pre-Sale */}
-    {/* <Publicsale /> */}    {/* Public Sale */}
+    <App />
+    {/* <Publicsale />  */}
   </Provider>,
   document.getElementById("root")
 );
