@@ -57,15 +57,25 @@ export const TextTitle = styled.p`
   font-weight: 400;
   letter-spacing: 8px;
   line-height: 1.6;
+  @media (max-width 480px) {
+    font-size: 36px;
+  }
 `;
 
 export const TextSub = styled.p`
   font-family: 'Upheaval';
   color: var(--primary-text);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 400;
   letter-spacing: 8px;
   line-height: 1.6;
+  @media (max-width: 1330px) {
+    font-size: 19px;
+  }
+  @media (max-width: 600px) {
+    font-size: 12px;
+
+  }
 `;
 
 export const TextSubTitle = styled.p`
@@ -74,12 +84,19 @@ export const TextSubTitle = styled.p`
   font-size: 20px;
   font-weight: 400;
   line-height: 1.6;
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
 `;
 
 export const TextDescription = styled.p`
   color: var(--primary-text);
+  font-family: "Renomono";
   font-size: 60px;
   line-height: 1.6;
+  @media (max-width: 1330px) {
+    font-size: 50px;
+  }
 `;
 
 export const StyledClickable = styled.div`
@@ -92,5 +109,5 @@ export const StyledHR = styled.hr`
   border: 2px solid #fff;  
   background-color: white;
   border-radius: 2px;
-  width: 450px;
+  width: 76%;
 `;

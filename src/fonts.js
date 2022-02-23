@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import RenoMono from './fonts/RenoMono.otf'
 import Upheaval from './fonts/upheavtt.ttf';
-// import Gumball from './Gumball.ttf';
+import Gumball from './fonts/Gumball.ttf';
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -12,6 +12,11 @@ const GlobalStyle = createGlobalStyle`
     @font-face {
         font-family: 'Renomono';
         src: url(${RenoMono}) format('opentype');
+    }
+
+    @font-face {
+        font-family: 'Gumball';
+        src: url(${Gumball}) format('truetype');
     }
 `;
 

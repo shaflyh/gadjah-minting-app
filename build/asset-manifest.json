@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.b3be25c8.chunk.css",
-    "main.js": "/static/js/main.f0f7e517.chunk.js",
-    "main.js.map": "/static/js/main.f0f7e517.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.82f2d441.js",
-    "runtime-main.js.map": "/static/js/runtime-main.82f2d441.js.map",
-    "static/js/2.35d4c77f.chunk.js": "/static/js/2.35d4c77f.chunk.js",
-    "static/js/2.35d4c77f.chunk.js.map": "/static/js/2.35d4c77f.chunk.js.map",
-    "static/js/3.a18fce49.chunk.js": "/static/js/3.a18fce49.chunk.js",
-    "static/js/3.a18fce49.chunk.js.map": "/static/js/3.a18fce49.chunk.js.map",
+    "main.css": "/static/css/main.8e4d840b.chunk.css",
+    "main.js": "/static/js/main.2fe00f9d.chunk.js",
+    "main.js.map": "/static/js/main.2fe00f9d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f29d54b5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f29d54b5.js.map",
+    "static/js/2.50dd17a8.chunk.js": "/static/js/2.50dd17a8.chunk.js",
+    "static/js/2.50dd17a8.chunk.js.map": "/static/js/2.50dd17a8.chunk.js.map",
+    "static/js/3.a90740bd.chunk.js": "/static/js/3.a90740bd.chunk.js",
+    "static/js/3.a90740bd.chunk.js.map": "/static/js/3.a90740bd.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.b3be25c8.chunk.css.map": "/static/css/main.b3be25c8.chunk.css.map",
-    "static/js/2.35d4c77f.chunk.js.LICENSE.txt": "/static/js/2.35d4c77f.chunk.js.LICENSE.txt",
-    "static/media/RenoMono.8b239c68.otf": "/static/media/RenoMono.8b239c68.otf",
-    "static/media/reset.css": "/static/media/font.617a0a92.woff",
-    "static/media/upheavtt.e3d365ba.ttf": "/static/media/upheavtt.e3d365ba.ttf"
+    "static/css/main.8e4d840b.chunk.css.map": "/static/css/main.8e4d840b.chunk.css.map",
+    "static/js/2.50dd17a8.chunk.js.LICENSE.txt": "/static/js/2.50dd17a8.chunk.js.LICENSE.txt",
+    "static/media/Gumball.2e792f78.ttf": "/static/media/Gumball.2e792f78.ttf",
+    "static/media/style.css": "/static/media/upheavtt.e3d365ba.ttf",
+    "static/media/reset.css": "/static/media/font.617a0a92.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.82f2d441.js",
-    "static/js/2.35d4c77f.chunk.js",
-    "static/css/main.b3be25c8.chunk.css",
-    "static/js/main.f0f7e517.chunk.js"
+    "static/js/runtime-main.f29d54b5.js",
+    "static/js/2.50dd17a8.chunk.js",
+    "static/css/main.8e4d840b.chunk.css",
+    "static/js/main.2fe00f9d.chunk.js"
   ]
 }
