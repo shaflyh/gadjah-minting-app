@@ -394,7 +394,7 @@ function App() {
   };
 
   const dispatch = useDispatch();
-  const whitelist_url = "https://api.gadjahsocietynft.com/whitelist";
+  const whitelist_url = ""; // this variable is used if you have whitelist API, you can adjust to get the data from `useEffect()` and `const getData()` 
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [walletAddress, setAddress] = useState("No connection");
@@ -439,22 +439,12 @@ function App() {
      }
    }
  
-   let json = require('./Accounts.json');
-   const Whitelist = [];
-   for (var i in json) {
-      Whitelist.push(json[i].wallet)
-  }
-
-   const leafNodes = Whitelist.map(addr => keccak256(addr));
-   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
-   const rootHash = merkleTree.getRoot();
-   const claimingAddress = keccak256(accounts[0]);
-   const hexProof = merkleTree.getHexProof(claimingAddress);
-
-    // console.log(hexProof)
-    // console.log("hexproof:" + hexProof)
-    // console.log(hexProof.toString())
-
+  let Whitelist = require('./Accounts.json');
+  const leafNodes = Whitelist.map(addr => keccak256(addr));
+  const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
+  const rootHash = merkleTree.getRoot();
+  const claimingAddress = keccak256(accounts[0]);
+  const hexProof = merkleTree.getHexProof(claimingAddress);
  //Merkle
 
   const claimNFTs = () => {
@@ -497,12 +487,10 @@ function App() {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    // console.log("Cost: ", totalCostWei);
-    // console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .mintPresale(mintAmount, "[" + hexProof.toString() +  "]") //mintPresale dan pake hexproof, ya, ntr diganti
+      .mintPresale(mintAmount, hexProof)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -525,7 +513,7 @@ function App() {
       });
   };
   //new code
-  // console.log(feedback)
+
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
     if (newMintAmount < 1) {
@@ -542,23 +530,19 @@ function App() {
     setMintAmount(newMintAmount);
   };
 
-  const getData = () => {
+  const getData = () => { // checking if the connected wallet is in whitelist
 
       let checking = false;
       if (blockchain.account !== "" && blockchain.smartContract !== null) {
         dispatch(fetchData(blockchain.account));
         setCheckWallet(false);
         setAddress("No connection");
-        // const rk = "0xd1EeA2145B9AEE5b6110FDCe59d884E90410858D";
-        // console.log(wl_wallet)
         wl && wl.map((w) => {
-          // console.log(w.wallet)
           if (w.wallet.toUpperCase() == blockchain.account.toUpperCase()) {
             // console.log(w.wallet)
             checking = true;
             setCheckWallet(true);
           }
-          // console.log(w.wallet)
         });
 
         if (checking) {
@@ -589,14 +573,13 @@ function App() {
     getData();
   }, [blockchain.account]);
 
-  useEffect(() => {
+  useEffect(() => { // hit api to get whitelist data (wallet)
     axios.get(whitelist_url).then((response) => {
       setWL(response.data.reponse);
-      // console.log(response.data.reponse)
     });
   }, []);
   
-  const calculateTimeLeft = () => {
+  const calculateTimeLeft = () => { // countdown time for page access
     let year = new Date().getFullYear();
     const difference = +new Date(`${year}-2-17 21:10:00`) - +new Date();
     let timeLeft = {};
@@ -679,26 +662,20 @@ function App() {
           </WalletBox>
         </ResponsiveWrapperHeader>
 
-        {/* <s.Container flex={1} jc={"center"} ai={"center"}>
-          <s.TextTitle> PUBLIC SALE </s.TextTitle>
-        </s.Container> */}
-    
         <s.SpacerSmall />
         {timerComponents.length ?  
           <>
           <Countdown>
-            <CTitle>Gadjah Society NFT Minting in</CTitle> <br></br>
+            <CTitle>My NFT Minting in</CTitle> <br></br>
             {timerComponents}
           </Countdown>
       
           <ResponsiveWrapperZero flex={1} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            {/* <StyledImg alt={"Gadjah with the duck"} src={"/config/images/unr_nft.png"} /> */}
             <UnrevealVid autoPlay loop muted>
               <source src={"/config/images/g_reveal.mp4"} type='video/mp4'/>
             </UnrevealVid>
           </s.Container>
-          {/* <s.SpacerLarge /> */}
           <s.Container flex={1} jc={"center"} ai={"center"} >
           <s.SpacerSmall />
           
@@ -743,7 +720,6 @@ function App() {
                       e.preventDefault();
                       dispatch(connect());
                       getData();
-                      // checkWL();
                     }}
                     style={{cursor: "none"}}
                     disabled>
@@ -781,12 +757,10 @@ function App() {
         :
         <ResponsiveWrapper flex={1} test>
             <s.Container flex={1} jc={"center"} ai={"center"}>
-              {/* <StyledImg alt={"Gadjah with the duck"} src={"/config/images/unr_nft.png"} /> */}
               <UnrevealVid autoPlay loop muted>
                 <source src={"/config/images/g_reveal.mp4"} type='video/mp4'/>
               </UnrevealVid>
             </s.Container>
-            {/* <s.SpacerLarge /> */}
             <s.Container flex={1} jc={"center"} ai={"center"} >
             {!(!wl_wallet || blockchain.account === "" ||
                 blockchain.smartContract === null) ? (
@@ -807,7 +781,6 @@ function App() {
                 </>) : null 
               }
             <s.SpacerSmall />
-            {/* {console.log(data.totalSupply)} */}
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
                 <s.TextSub
@@ -839,7 +812,6 @@ function App() {
                 </ResponsiveWrapperContent>
                 <s.SpacerSmall />
                 <s.StyledHR></s.StyledHR>
-                {/* <s.SpacerXSmall /> */}
                 {!wl_wallet || blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
@@ -849,7 +821,6 @@ function App() {
                         e.preventDefault();
                         dispatch(connect());
                         getData();
-                        // checkWL();
                       }}
                     >
                       CONNECT WALLET

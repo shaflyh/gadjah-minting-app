@@ -44,8 +44,6 @@ function Countdown() {
   });
   return (
     <div>
-      {/* <h1>HacktoberFest {year} Countdown</h1>
-      <h2>With React Hooks!</h2> */}
       {timerComponents.length ? timerComponents : <span>Time's up!</span>}
     </div>
   );

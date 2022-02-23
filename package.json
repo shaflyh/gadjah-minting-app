@@ -1,8 +1,8 @@
 {
-  "name": "gadjah_society",
+  "name": "my_nft",
   "version": "1.0.0",
-  "description": "Gadjah Society NFT",
-  "homepage": "https://mint.gadjahsociety.com",
+  "description": "My NFT",
+  "homepage": "https://mint.my_nft.com",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -28,8 +28,8 @@
   "author": "Ali Solanki, Daniel Eugene Botha",
   "license": "MIT",
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "browserslist": {
     "production": [

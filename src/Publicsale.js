@@ -15,7 +15,6 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from "./Modal";
 import { Mintsuccess } from "./Mintsuccess";
 import "./style.css";
-import axios from "axios";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -386,7 +385,6 @@ function Publicsale() {
   };
 
   const dispatch = useDispatch();
-  const whitelist_url = "https://api.gadjahsocietynft.com/whitelist";
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [walletAddress, setAddress] = useState("No connection");
@@ -413,8 +411,6 @@ function Publicsale() {
     SHOW_BACKGROUND: false,
     WHITELIST_URL: ""
   });
-
-  // console.log("BC: "+blockchain.smartContract)
 
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
@@ -574,8 +570,8 @@ function Publicsale() {
         {timerComponents.length ?  
           <>
           <Countdown>
-            {/* <CTitle>Gadjah Society NFT Minting is</CTitle> <br></br> */}
-            {/* {timerComponents} */}
+            <CTitle>My NFT Minting in</CTitle> <br></br>
+            {timerComponents}
           </Countdown>
       
           <ResponsiveWrapperZero flex={1} test>
