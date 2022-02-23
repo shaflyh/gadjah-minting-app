@@ -451,8 +451,9 @@ function App() {
    const claimingAddress = keccak256(accounts[0]);
    const hexProof = merkleTree.getHexProof(claimingAddress);
 
-    // console.log(hexProof.toString())
+    // console.log(hexProof)
     // console.log("hexproof:" + hexProof)
+    // console.log(hexProof.toString())
 
  //Merkle
 
@@ -460,7 +461,7 @@ function App() {
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
-    let totalGasLimit = String(gasLimit * mintAmount);
+    let totalGasLimit = String(gasLimit);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
     setClaimingNft(true);
@@ -496,12 +497,12 @@ function App() {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    console.log("Cost: ", totalCostWei);
-    console.log("Gas limit: ", totalGasLimit);
+    // console.log("Cost: ", totalCostWei);
+    // console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .mint(mintAmount) //mintPresale dan pake hexproof, ya, ntr diganti
+      .mintPresale(mintAmount, "[" + hexProof.toString() +  "]") //mintPresale dan pake hexproof, ya, ntr diganti
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -524,7 +525,7 @@ function App() {
       });
   };
   //new code
-  console.log(feedback)
+  // console.log(feedback)
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
     if (newMintAmount < 1) {
@@ -543,16 +544,17 @@ function App() {
 
   const getData = () => {
 
-    // if (wl_wallet) {
       let checking = false;
       if (blockchain.account !== "" && blockchain.smartContract !== null) {
         dispatch(fetchData(blockchain.account));
         setCheckWallet(false);
         setAddress("No connection");
+        // const rk = "0xd1EeA2145B9AEE5b6110FDCe59d884E90410858D";
         // console.log(wl_wallet)
         wl && wl.map((w) => {
+          // console.log(w.wallet)
           if (w.wallet.toUpperCase() == blockchain.account.toUpperCase()) {
-            console.log(w.wallet)
+            // console.log(w.wallet)
             checking = true;
             setCheckWallet(true);
           }
@@ -596,7 +598,7 @@ function App() {
   
   const calculateTimeLeft = () => {
     let year = new Date().getFullYear();
-    const difference = +new Date(`${year}-2-18 21:10:00`) - +new Date();
+    const difference = +new Date(`${year}-2-17 21:10:00`) - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {
@@ -799,13 +801,13 @@ function App() {
                   }}
                 >
                   {data.totalSupply} of {CONFIG.MAX_SUPPLY} <br></br>
-                <Texto>NFT Available</Texto>
+                <Texto>NFT Minted</Texto>
                 </s.TextTitle>
                 </Box>
                 </>) : null 
               }
             <s.SpacerSmall />
-            
+            {/* {console.log(data.totalSupply)} */}
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
                 <s.TextSub
@@ -922,8 +924,8 @@ function App() {
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
-                          claimNFTs();
-                          // WlMint();
+                          // claimNFTs();
+                          WlMint();
                           getData();
                         }}
                       >

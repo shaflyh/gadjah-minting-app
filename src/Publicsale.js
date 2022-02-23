@@ -414,13 +414,13 @@ function Publicsale() {
     WHITELIST_URL: ""
   });
 
+  // console.log("BC: "+blockchain.smartContract)
+
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
-    let totalGasLimit = String(gasLimit * mintAmount);
-    // console.log("Cost: ", totalCostWei);
-    // console.log("Gas limit: ", totalGasLimit);
+    let totalGasLimit = String(gasLimit);
     setClaimingNft(true);
     blockchain.smartContract.methods
       .mint(mintAmount)
@@ -490,7 +490,7 @@ function Publicsale() {
     
   const calculateTimeLeft = () => {
     let year = new Date().getFullYear();
-    const difference = +new Date(`${year}-2-17 21:00:00`) - +new Date();
+    const difference = +new Date(`${year}-12-17 21:00:00`) - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {
@@ -526,6 +526,8 @@ function Publicsale() {
       </span>
     );
   });
+
+  console.log(blockchain.account)
 
   return (
     <s.Screen>
@@ -572,8 +574,8 @@ function Publicsale() {
         {timerComponents.length ?  
           <>
           <Countdown>
-            <CTitle>Gadjah Society NFT Minting in</CTitle> <br></br>
-            {timerComponents}
+            {/* <CTitle>Gadjah Society NFT Minting is</CTitle> <br></br> */}
+            {/* {timerComponents} */}
           </Countdown>
       
           <ResponsiveWrapperZero flex={1} test>
@@ -629,7 +631,7 @@ function Publicsale() {
                       dispatch(connect());
                       getData();
                     }}
-                    style={{cursor: "none"}}
+                    style={{cursor: "default"}}
                     disabled>
                     CONNECT WALLET
                   </StyledButton>
@@ -650,7 +652,7 @@ function Publicsale() {
                 </s.Container>
               ) :  null }
               <s.SpacerLarge />
-              <HowToMint style={{cursor: "none", textDecoration: "none" }}>
+              <HowToMint style={{cursor: "default", textDecoration: "none" }}>
                 how to mint <FontAwesomeIcon icon={ faQuestionCircle } />
               </HowToMint>
               {showModal ? <Modal setShowModal={setShowModal} /> : null}
@@ -684,7 +686,7 @@ function Publicsale() {
                   }}
                 >
                   {data.totalSupply} of {CONFIG.MAX_SUPPLY} <br></br>
-                <Texto>NFT Available</Texto>
+                <Texto>NFT Minted</Texto>
                 </s.TextTitle>
                 </Box>
                 </>) : null 
