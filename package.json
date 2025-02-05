@@ -1,8 +1,8 @@
 {
-  "name": "my_nft",
+  "name": "gadjah_society",
   "version": "1.0.0",
-  "description": "My NFT",
-  "homepage": "https://mint.my_nft.com",
+  "description": "Gadjah Society NFT",
+  "homepage": "https://www.gadjahsocietynft.com",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",

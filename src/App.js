@@ -4,35 +4,34 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
   faDiscord,
   faTwitter,
   faMedium,
-} from '@fortawesome/free-brands-svg-icons';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-brands-svg-icons";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "./Modal";
 import { Notwl } from "./NotWL";
 import { Mintsuccess } from "./Mintsuccess";
 import "./style.css";
 import axios from "axios";
 
-
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
 export const StyledButton = styled.button`
-  font-family: 'Upheaval';
+  font-family: "Upheaval";
   padding: 10px;
   font-size: 20px;
   border-radius: 4px;
-  border: 4px solid #7167E3;
-  background-color: #49FCE3;
+  border: 4px solid #7167e3;
+  background-color: #49fce3;
   padding: 10px;
   letter-spacing: 6px;
   // font-weight: bold;
-  color: #7167E3;
+  color: #7167e3;
   width: 75%;
   height: 50px;
   cursor: pointer;
@@ -52,7 +51,6 @@ export const StyledButton = styled.button`
   }
 `;
 
-
 export const StyledRoundButton = styled.button`
   padding: 10px;
   border-radius: 10px;
@@ -60,7 +58,7 @@ export const StyledRoundButton = styled.button`
   background-color: #fff;
   // font-weight: bold;
   font-size: 50px;
-  color: #7167E3;
+  color: #7167e3;
   width: 60px;
   height: 60px;
   cursor: pointer;
@@ -84,7 +82,7 @@ export const StyledRoundButton = styled.button`
 
 export const ResponsiveWrapper = styled.div`
   backdrop-filter: blur(4px);
-  background-color: rgba(0, 0,0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -105,10 +103,10 @@ export const ResponsiveWrapper = styled.div`
   }
 `;
 
-export const ResponsiveWrapperZero = styled.div `
+export const ResponsiveWrapperZero = styled.div`
   filter: blur(4px);
   backdrop-filter: blur(4px);
-  background-color: rgba(0, 0,0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -129,14 +127,14 @@ export const ResponsiveWrapperZero = styled.div `
   }
 `;
 
-export const Countdown = styled.p `
-  font-family: 'Upheaval';
+export const Countdown = styled.div`
+  font-family: "Upheaval";
   color: var(--primary-text);
   font-size: 56px;
   font-weight: 400;
   letter-spacing: 8px;
   // -webkit-text-stroke: 2px #49FCE3;
-  -webkit-text-stroke: 2px #7167E3;
+  -webkit-text-stroke: 2px #7167e3;
   z-index: 99;
   top: 42%;
   position: absolute;
@@ -149,17 +147,17 @@ export const Countdown = styled.p `
     top: 50%;
     margin: 0 20px;
     font-size: 36px;
-    -webkit-text-stroke: 1px #7167E3;
+    -webkit-text-stroke: 1px #7167e3;
   }
 `;
 
-export const CTitle = styled.p `
+export const CTitle = styled.p`
   font-size: 40px;
-  webkit-text-stroke: 2px #7167E3;
+  webkit-text-stroke: 2px #7167e3;
   @media (max-width: 420px) {
     margin: 0 20px;
     font-size: 24px;
-    -webkit-text-stroke: 1px #7167E3;
+    -webkit-text-stroke: 1px #7167e3;
   }
 `;
 
@@ -203,7 +201,7 @@ export const StyledLogo = styled.img`
   }
   @media (max-width: 767px) {
     width: 150px;
-    margin: auto
+    margin: auto;
   }
   transition: width 0.5s;
   transition: height 0.5s;
@@ -214,10 +212,10 @@ export const SocialMediaImage = styled.img`
   width: 33px;
   transition: width 0.5s;
   transition: height 0.5s;
-  transition: transform .3s;
+  transition: transform 0.3s;
   &:hover {
     transform: scale(1.3);
-  };
+  }
   @media (max-width: 1330px) {
     width: 25px;
   }
@@ -240,8 +238,8 @@ export const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-export const Texto = styled.div `
-  font-family: 'Upheaval';
+export const Texto = styled.div`
+  font-family: "Upheaval";
   color: var(--primary-text);
   font-size: 18px;
   letter-spacing: 8px;
@@ -250,28 +248,28 @@ export const Texto = styled.div `
   }
 `;
 
-export const Box = styled.div `
-margin: auto;
-text-decoration: none;
-border: 4px solid white;
-background-color: #172a5a;
-// font-weight: bold;
-// font-size: 15px;
-width: 350px;
-height: 100px;
-display: flex;
-align-items: center;
-justify-content: center;
-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
--webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
--moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-@media (max-width: 480px) {
-  width: 75%;
-  height: 85px;
-}
-// @media (max-width: 767px) {
-//   margin: auto;
-// }
+export const Box = styled.div`
+  margin: auto;
+  text-decoration: none;
+  border: 4px solid white;
+  background-color: #172a5a;
+  // font-weight: bold;
+  // font-size: 15px;
+  width: 350px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+  -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+  -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+  @media (max-width: 480px) {
+    width: 75%;
+    height: 85px;
+  }
+  // @media (max-width: 767px) {
+  //   margin: auto;
+  // }
 `;
 
 export const WalletBox = styled.div`
@@ -301,16 +299,16 @@ export const WalletBox = styled.div`
   }
 `;
 
-export const SocialMedia = styled.a `
+export const SocialMedia = styled.a`
   color: #fff;
   margin: 18px;
   vertical-align: middle;
   @media (max-width: 600px) {
     margin: 10px;
   }
-`; 
+`;
 
-export const SocialMediaDiv = styled.div `
+export const SocialMediaDiv = styled.div`
   font-size: 32px;
   padding: 16px;
   @media (max-width: 1330px) {
@@ -336,7 +334,7 @@ export const HowToMint = styled.a`
   }
 `;
 
-export const ModalButton = styled.button `
+export const ModalButton = styled.button`
   padding: 13px 29px;
   font-size: 1rem;
   font-weight: bold;
@@ -352,7 +350,7 @@ export const customClasss = `
   border: 2px solid #000;
 `;
 
-export const UnrevealVid = styled.video `
+export const UnrevealVid = styled.video`
   border-radius: 4px;
   // border: 4px solid #7167e3;
   width: 380px;
@@ -372,29 +370,29 @@ export const UnrevealVid = styled.video `
   @media (min-width: 1330px) {
     width: 380px;
   }
-`
+`;
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  
+
   const openModal = () => {
-    setShowModal(true);    
+    setShowModal(true);
   };
 
   const [showNotwl, setShowNotwl] = useState(false);
 
   const openNotwl = () => {
-    setShowNotwl(true);    
+    setShowNotwl(true);
   };
 
   const [showMintsuccess, setShowMintsuccess] = useState(false);
 
   const openMintsuccess = () => {
-    setShowMintsuccess(true);    
+    setShowMintsuccess(true);
   };
 
   const dispatch = useDispatch();
-  const whitelist_url = ""; // this variable is used if you have whitelist API, you can adjust to get the data from `useEffect()` and `const getData()` 
+  const whitelist_url = ""; // this variable is used if you have whitelist API, you can adjust to get the data from `useEffect()` and `const getData()`
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [walletAddress, setAddress] = useState("No connection");
@@ -420,32 +418,34 @@ function App() {
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
-    WHITELIST_URL: ""
+    WHITELIST_URL: "",
   });
 
-   //Merkle
-   const [accounts, setAccounts] = useState([]);
-   const { MerkleTree } = require('merkletreejs');
-   const keccak256 = require('keccak256');
- 
-   useEffect(() => {
-     requestAccount();
-   }, [])
- 
-   async function requestAccount() {
-     if(typeof window.ethereum !== 'undefined') {
-       let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-       setAccounts(accounts);
-     }
-   }
- 
-  let Whitelist = require('./Accounts.json');
-  const leafNodes = Whitelist.map(addr => keccak256(addr));
-  const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
+  //Merkle
+  const [accounts, setAccounts] = useState([]);
+  const { MerkleTree } = require("merkletreejs");
+  const keccak256 = require("keccak256");
+
+  useEffect(() => {
+    requestAccount();
+  }, []);
+
+  async function requestAccount() {
+    if (typeof window.ethereum !== "undefined") {
+      let accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      setAccounts(accounts);
+    }
+  }
+
+  let Whitelist = require("./Accounts.json");
+  const leafNodes = Whitelist.map((addr) => keccak256(addr));
+  const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
   const rootHash = merkleTree.getRoot();
   const claimingAddress = keccak256(accounts[0]);
   const hexProof = merkleTree.getHexProof(claimingAddress);
- //Merkle
+  //Merkle
 
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
@@ -508,7 +508,7 @@ function App() {
           `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
         );
         setClaimingNft(false);
-        openMintsuccess();  //nanti dihapus yaa
+        openMintsuccess(); //nanti dihapus yaa
         dispatch(fetchData(blockchain.account));
       });
   };
@@ -530,14 +530,16 @@ function App() {
     setMintAmount(newMintAmount);
   };
 
-  const getData = () => { // checking if the connected wallet is in whitelist
+  const getData = () => {
+    // checking if the connected wallet is in whitelist
 
-      let checking = false;
-      if (blockchain.account !== "" && blockchain.smartContract !== null) {
-        dispatch(fetchData(blockchain.account));
-        setCheckWallet(false);
-        setAddress("No connection");
-        wl && wl.map((w) => {
+    let checking = false;
+    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account));
+      setCheckWallet(false);
+      setAddress("No connection");
+      wl &&
+        wl.map((w) => {
           if (w.wallet.toUpperCase() == blockchain.account.toUpperCase()) {
             // console.log(w.wallet)
             checking = true;
@@ -545,13 +547,16 @@ function App() {
           }
         });
 
-        if (checking) {
-          setAddress(blockchain.account.substring(0,4) + "..." + blockchain.account.substring(38,42));
-        }
-        else {
-          openNotwl();
-        }
+      if (checking) {
+        setAddress(
+          blockchain.account.substring(0, 4) +
+            "..." +
+            blockchain.account.substring(38, 42)
+        );
+      } else {
+        openNotwl();
       }
+    }
   };
 
   const getConfig = async () => {
@@ -573,15 +578,27 @@ function App() {
     getData();
   }, [blockchain.account]);
 
-  useEffect(() => { // hit api to get whitelist data (wallet)
-    axios.get(whitelist_url).then((response) => {
-      setWL(response.data.reponse);
-    });
+  useEffect(() => {
+    // hit api to get whitelist data (wallet)
+    // axios.get(whitelist_url).then((response) => {
+    //   setWL(response.data.reponse);
+    // });
+    if (whitelist_url) {
+      axios
+        .get(whitelist_url)
+        .then((response) => {
+          setWL(response.data.response);
+        })
+        .catch((error) => {
+          console.error("Error fetching whitelist data:", error);
+        });
+    }
   }, []);
-  
-  const calculateTimeLeft = () => { // countdown time for page access
+
+  const calculateTimeLeft = () => {
+    // countdown time for page access
     let year = new Date().getFullYear();
-    const difference = +new Date(`${year}-2-17 21:10:00`) - +new Date();
+    const difference = +new Date(`${year}-2-01 21:10:00`) - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {
@@ -613,7 +630,7 @@ function App() {
     }
 
     timerComponents.push(
-      <span>
+      <span key={interval}>
         {timeLeft[interval]} {interval}{" "}
       </span>
     );
@@ -646,277 +663,306 @@ function App() {
               <FontAwesomeIcon className="zoom-a" icon={faInstagram} />
             </SocialMedia>
             <SocialMedia href={CONFIG.MARKETPLACE_LINK}>
-              <SocialMediaImage alt={"logo"} src={"/config/images/logo-opensea.png"} />
+              <SocialMediaImage
+                alt={"logo"}
+                src={"/config/images/logo-opensea.png"}
+              />
             </SocialMedia>
           </SocialMediaDiv>
-          
+
           {/* </SocialMedia> */}
           <WalletBox>
             {blockchain.account !== "" ? (
-            <>
-            <s.TextSubTitle>
-              {walletAddress}
-              </s.TextSubTitle>
-            </>
-            ) : null }
+              <>
+                <s.TextSubTitle>{walletAddress}</s.TextSubTitle>
+              </>
+            ) : null}
           </WalletBox>
         </ResponsiveWrapperHeader>
-
         <s.SpacerSmall />
-        {timerComponents.length ?  
+        {timerComponents.length ? (
           <>
-          <Countdown>
-            <CTitle>My NFT Minting in</CTitle> <br></br>
-            {timerComponents}
-          </Countdown>
-      
-          <ResponsiveWrapperZero flex={1} test>
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            <UnrevealVid autoPlay loop muted>
-              <source src={"/config/images/g_reveal.mp4"} type='video/mp4'/>
-            </UnrevealVid>
-          </s.Container>
-          <s.Container flex={1} jc={"center"} ai={"center"} >
-          <s.SpacerSmall />
-          
-          {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
-            <>
-              <s.TextSub
-                style={{ textAlign: "center", color: "var(--accent-text)" }}
-              >
-                The sale has ended.
-              </s.TextSub>
-              <s.TextDescription
-                style={{ textAlign: "center", color: "var(--accent-text)" }}
-              >
-                You can still find {CONFIG.NFT_NAME} on
-              </s.TextDescription>
-              <s.SpacerSmall />
-              <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-                {CONFIG.MARKETPLACE}
-              </StyledLink>
-            </>
-          ) : (
-            <>
-            <ResponsiveWrapperContent>
-              <s.TextSub>
-                Price
-              </s.TextSub>
-              <s.TextSub
-                style={{ textAlign: "center", color: "var(--accent-text)",  }}
-              >
-                {CONFIG.DISPLAY_COST}{" "}{CONFIG.NETWORK.SYMBOL}
-              </s.TextSub>
-              </ResponsiveWrapperContent>
-              <s.SpacerSmall />
-              <s.StyledHR></s.StyledHR>
-              <s.SpacerXSmall />
-              {!wl_wallet || blockchain.account === "" ||
-              blockchain.smartContract === null ? (
-                <s.Container ai={"center"} jc={"center"}>
-                  <s.SpacerSmall />
-                  <StyledButton
-                    onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(connect());
-                      getData();
-                    }}
-                    style={{cursor: "none"}}
-                    disabled>
-                    CONNECT WALLET
-                  </StyledButton>
-                  {blockchain.errorMsg !== "" ? (
-                    <>
-                      <s.SpacerSmall />
-                      <s.TextDescription
-                        style={{
-                          textAlign: "center",
-                          color: "var(--accent-text)",
-                          fontSize: "20px"
-                        }}
-                      >
-                        {blockchain.errorMsg}
-                      </s.TextDescription>
-                    </>
-                  ) : null}
-                </s.Container>
-              ) :  null }
-              <s.SpacerLarge />
-              <HowToMint style={{cursor: "none", textDecoration: "none" }}>
-                how to mint <FontAwesomeIcon icon={ faQuestionCircle } />
-              </HowToMint>
-              {showModal ? <Modal setShowModal={setShowModal} /> : null}
-            </>
-          )} 
-          {showNotwl ? <Notwl setShowNotwl={setShowNotwl} /> : null}
-          {showMintsuccess ? <Mintsuccess setShowMintsuccess={setShowMintsuccess} /> : null}
-          </s.Container>
-        <s.SpacerLarge />
-      </ResponsiveWrapperZero>
-      </>
-        :
-        <ResponsiveWrapper flex={1} test>
-            <s.Container flex={1} jc={"center"} ai={"center"}>
-              <UnrevealVid autoPlay loop muted>
-                <source src={"/config/images/g_reveal.mp4"} type='video/mp4'/>
-              </UnrevealVid>
-            </s.Container>
-            <s.Container flex={1} jc={"center"} ai={"center"} >
-            {!(!wl_wallet || blockchain.account === "" ||
-                blockchain.smartContract === null) ? (
-                <>
-                <Box>
-                <s.TextTitle
-                  style={{
-                    textAlign: "center",
-                    fontSize: 26,
-                    fontWeight: "bold",
-                    color: "var(--accent-text)",
-                  }}
-                >
-                  {data.totalSupply} of {CONFIG.MAX_SUPPLY} <br></br>
-                <Texto>NFT Minted</Texto>
-                </s.TextTitle>
-                </Box>
-                </>) : null 
-              }
-            <s.SpacerSmall />
-            {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
-              <>
-                <s.TextSub
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  The sale has ended.
-                </s.TextSub>
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  You can still find {CONFIG.NFT_NAME} on
-                </s.TextDescription>
+            <Countdown>
+              <CTitle>My NFT Minting in</CTitle> <br></br>
+              {timerComponents}
+            </Countdown>
+
+            <ResponsiveWrapperZero flex={1} test>
+              <s.Container flex={1} jc={"center"} ai={"center"}>
+                <UnrevealVid autoPlay loop muted>
+                  <source
+                    src={"/config/images/g_reveal.mp4"}
+                    type="video/mp4"
+                  />
+                </UnrevealVid>
+              </s.Container>
+              <s.Container flex={1} jc={"center"} ai={"center"}>
                 <s.SpacerSmall />
-                <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-                  {CONFIG.MARKETPLACE}
-                </StyledLink>
-              </>
-            ) : (
-              <>
-              <ResponsiveWrapperContent>
-                <s.TextSub>
-                  Price
-                </s.TextSub>
-                <s.TextSub
-                  style={{ textAlign: "center", color: "var(--accent-text)",  }}
-                >
-                  {CONFIG.DISPLAY_COST}{" "}{CONFIG.NETWORK.SYMBOL}
-                </s.TextSub>
-                </ResponsiveWrapperContent>
-                <s.SpacerSmall />
-                <s.StyledHR></s.StyledHR>
-                {!wl_wallet || blockchain.account === "" ||
-                blockchain.smartContract === null ? (
-                  <s.Container ai={"center"} jc={"center"}>
-                    <s.SpacerSmall />
-                    <StyledButton
-                      onClick={(e) => {
-                        e.preventDefault();
-                        dispatch(connect());
-                        getData();
+
+                {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+                  <>
+                    <s.TextSub
+                      style={{
+                        textAlign: "center",
+                        color: "var(--accent-text)",
                       }}
                     >
-                      CONNECT WALLET
-                    </StyledButton>
-                    {blockchain.errorMsg !== "" ? (
-                      <>
-                        <s.SpacerSmall />
-                        <s.TextDescription
-                          style={{
-                            textAlign: "center",
-                            color: "var(--accent-text)",
-                            fontSize: "20px"
-                          }}
-                        >
-                          {blockchain.errorMsg}
-                        </s.TextDescription>
-                      </>
-                    ) : null}
-                  </s.Container>
+                      The sale has ended.
+                    </s.TextSub>
+                    <s.TextDescription
+                      style={{
+                        textAlign: "center",
+                        color: "var(--accent-text)",
+                      }}
+                    >
+                      You can still find {CONFIG.NFT_NAME} on
+                    </s.TextDescription>
+                    <s.SpacerSmall />
+                    <StyledLink
+                      target={"_blank"}
+                      href={CONFIG.MARKETPLACE_LINK}
+                    >
+                      {CONFIG.MARKETPLACE}
+                    </StyledLink>
+                  </>
                 ) : (
                   <>
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
                     <ResponsiveWrapperContent>
-                      <StyledRoundButton
-                        style={{ lineHeight: 0.4 }}
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          decrementMintAmount();
-                        }}
-                      >
-                        -
-                      </StyledRoundButton>
-                      <s.TextDescription
+                      <s.TextSub>Price</s.TextSub>
+                      <s.TextSub
                         style={{
-                          fontFamily : "Upheaval",
                           textAlign: "center",
                           color: "var(--accent-text)",
                         }}
                       >
-                        {mintAmount}
-                      </s.TextDescription>
-                      <StyledRoundButton
-                        disabled={claimingNft || mintAmount >= 5 ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          incrementMintAmount();
-                        }}
-                      >
-                        +
-                      </StyledRoundButton>
-                      </ResponsiveWrapperContent>
-                    </s.Container>
-                    <s.StyledHR ></s.StyledHR>
-                    <s.SpacerSmall />
-                    
-                    <ResponsiveWrapperContent>
-                      <s.TextSub>
-                        Total
+                        {CONFIG.DISPLAY_COST} {CONFIG.NETWORK.SYMBOL}
                       </s.TextSub>
-                      <s.TextSub
-                        style={{ textAlign: "right", color: "var(--accent-text)",  }}
-                      >
-                        {CONFIG.DISPLAY_COST * mintAmount}{" "}{CONFIG.NETWORK.SYMBOL}
-                      </s.TextSub>  
                     </ResponsiveWrapperContent>
-                    
                     <s.SpacerSmall />
+                    <s.StyledHR></s.StyledHR>
                     <s.SpacerXSmall />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                    {!wl_wallet ||
+                    blockchain.account === "" ||
+                    blockchain.smartContract === null ? (
+                      <s.Container ai={"center"} jc={"center"}>
+                        <s.SpacerSmall />
+                        <StyledButton
+                          onClick={(e) => {
+                            e.preventDefault();
+                            dispatch(connect());
+                            getData();
+                          }}
+                          style={{ cursor: "none" }}
+                          disabled
+                        >
+                          CONNECT WALLET
+                        </StyledButton>
+                        {blockchain.errorMsg !== "" ? (
+                          <>
+                            <s.SpacerSmall />
+                            <s.TextDescription
+                              style={{
+                                textAlign: "center",
+                                color: "var(--accent-text)",
+                                fontSize: "20px",
+                              }}
+                            >
+                              {blockchain.errorMsg}
+                            </s.TextDescription>
+                          </>
+                        ) : null}
+                      </s.Container>
+                    ) : null}
+                    <s.SpacerLarge />
+                    <HowToMint
+                      style={{ cursor: "none", textDecoration: "none" }}
+                    >
+                      how to mint <FontAwesomeIcon icon={faQuestionCircle} />
+                    </HowToMint>
+                    {showModal ? <Modal setShowModal={setShowModal} /> : null}
+                  </>
+                )}
+                {showNotwl ? <Notwl setShowNotwl={setShowNotwl} /> : null}
+                {showMintsuccess ? (
+                  <Mintsuccess setShowMintsuccess={setShowMintsuccess} />
+                ) : null}
+              </s.Container>
+              <s.SpacerLarge />
+            </ResponsiveWrapperZero>
+          </>
+        ) : (
+          <ResponsiveWrapper flex={1} test>
+            <s.Container flex={1} jc={"center"} ai={"center"}>
+              <UnrevealVid autoPlay loop muted>
+                <source src={"/config/images/g_reveal.mp4"} type="video/mp4" />
+              </UnrevealVid>
+            </s.Container>
+            <s.Container flex={1} jc={"center"} ai={"center"}>
+              {!(
+                !wl_wallet ||
+                blockchain.account === "" ||
+                blockchain.smartContract === null
+              ) ? (
+                <>
+                  <Box>
+                    <s.TextTitle
+                      style={{
+                        textAlign: "center",
+                        fontSize: 26,
+                        fontWeight: "bold",
+                        color: "var(--accent-text)",
+                      }}
+                    >
+                      {data.totalSupply} of {CONFIG.MAX_SUPPLY} <br></br>
+                      <Texto>NFT Minted</Texto>
+                    </s.TextTitle>
+                  </Box>
+                </>
+              ) : null}
+              <s.SpacerSmall />
+              {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+                <>
+                  <s.TextSub
+                    style={{ textAlign: "center", color: "var(--accent-text)" }}
+                  >
+                    The sale has ended.
+                  </s.TextSub>
+                  <s.TextDescription
+                    style={{ textAlign: "center", color: "var(--accent-text)" }}
+                  >
+                    You can still find {CONFIG.NFT_NAME} on
+                  </s.TextDescription>
+                  <s.SpacerSmall />
+                  <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                    {CONFIG.MARKETPLACE}
+                  </StyledLink>
+                </>
+              ) : (
+                <>
+                  <ResponsiveWrapperContent>
+                    <s.TextSub>Price</s.TextSub>
+                    <s.TextSub
+                      style={{
+                        textAlign: "center",
+                        color: "var(--accent-text)",
+                      }}
+                    >
+                      {CONFIG.DISPLAY_COST} {CONFIG.NETWORK.SYMBOL}
+                    </s.TextSub>
+                  </ResponsiveWrapperContent>
+                  <s.SpacerSmall />
+                  <s.StyledHR></s.StyledHR>
+                  {!wl_wallet ||
+                  blockchain.account === "" ||
+                  blockchain.smartContract === null ? (
+                    <s.Container ai={"center"} jc={"center"}>
+                      <s.SpacerSmall />
                       <StyledButton
-                        disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
-                          // claimNFTs();
-                          WlMint();
+                          dispatch(connect());
                           getData();
                         }}
                       >
-                        {claimingNft ? "MINTING..." : "MINT NOW"}
+                        CONNECT WALLET
                       </StyledButton>
-                    </s.Container>                   
-                  </>
-                )}
-                <s.SpacerLarge />
-                <HowToMint onClick={openModal}>
-                  how to mint <FontAwesomeIcon icon={ faQuestionCircle } />
-                </HowToMint>
-                {showModal ? <Modal setShowModal={setShowModal} /> : null}
-              </>
-            )} 
-            {showNotwl ? <Notwl setShowNotwl={setShowNotwl} /> : null}
-            {showMintsuccess ? <Mintsuccess setShowMintsuccess={setShowMintsuccess} /> : null}
+                      {blockchain.errorMsg !== "" ? (
+                        <>
+                          <s.SpacerSmall />
+                          <s.TextDescription
+                            style={{
+                              textAlign: "center",
+                              color: "var(--accent-text)",
+                              fontSize: "20px",
+                            }}
+                          >
+                            {blockchain.errorMsg}
+                          </s.TextDescription>
+                        </>
+                      ) : null}
+                    </s.Container>
+                  ) : (
+                    <>
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                        <ResponsiveWrapperContent>
+                          <StyledRoundButton
+                            style={{ lineHeight: 0.4 }}
+                            disabled={claimingNft ? 1 : 0}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              decrementMintAmount();
+                            }}
+                          >
+                            -
+                          </StyledRoundButton>
+                          <s.TextDescription
+                            style={{
+                              fontFamily: "Upheaval",
+                              textAlign: "center",
+                              color: "var(--accent-text)",
+                            }}
+                          >
+                            {mintAmount}
+                          </s.TextDescription>
+                          <StyledRoundButton
+                            disabled={claimingNft || mintAmount >= 5 ? 1 : 0}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              incrementMintAmount();
+                            }}
+                          >
+                            +
+                          </StyledRoundButton>
+                        </ResponsiveWrapperContent>
+                      </s.Container>
+                      <s.StyledHR></s.StyledHR>
+                      <s.SpacerSmall />
+
+                      <ResponsiveWrapperContent>
+                        <s.TextSub>Total</s.TextSub>
+                        <s.TextSub
+                          style={{
+                            textAlign: "right",
+                            color: "var(--accent-text)",
+                          }}
+                        >
+                          {CONFIG.DISPLAY_COST * mintAmount}{" "}
+                          {CONFIG.NETWORK.SYMBOL}
+                        </s.TextSub>
+                      </ResponsiveWrapperContent>
+
+                      <s.SpacerSmall />
+                      <s.SpacerXSmall />
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                        <StyledButton
+                          disabled={claimingNft ? 1 : 0}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            // claimNFTs();
+                            WlMint();
+                            getData();
+                          }}
+                        >
+                          {claimingNft ? "MINTING..." : "MINT NOW"}
+                        </StyledButton>
+                      </s.Container>
+                    </>
+                  )}
+                  <s.SpacerLarge />
+                  <HowToMint onClick={openModal}>
+                    how to mint <FontAwesomeIcon icon={faQuestionCircle} />
+                  </HowToMint>
+                  {showModal ? <Modal setShowModal={setShowModal} /> : null}
+                </>
+              )}
+              {showNotwl ? <Notwl setShowNotwl={setShowNotwl} /> : null}
+              {showMintsuccess ? (
+                <Mintsuccess setShowMintsuccess={setShowMintsuccess} />
+              ) : null}
             </s.Container>
-          <s.SpacerLarge />
-        </ResponsiveWrapper> }
+            <s.SpacerLarge />
+          </ResponsiveWrapper>
+        )}
         <s.SpacerMedium />
       </s.Container>
     </s.Screen>

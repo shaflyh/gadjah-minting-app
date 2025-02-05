@@ -1,14 +1,7 @@
 # Gadjah Society NFT Minting Website
 
 ## Installation 
-
-Step 1: Clone the project
-
-```sh
-git clone git@gitlab.com:arnold.pstr/nft-minting-app-main.git
-```
-
-Step 2: Install node modules
+Install node modules
 
 ```sh
 npm install
